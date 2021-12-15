@@ -17,7 +17,7 @@ void main()
 
 System::Void Project1::MyForm::button3_Click(System::Object^ sender, System::EventArgs^ e)//Данные
 {
-	if (textBox1->Text == ""|| textBox2->Text == "")
+	if (textBox1->Text == "" || textBox2->Text == "")
 	{
 		DefaultParams();
 		textBox1->Text = Convert::ToString(size);
@@ -26,7 +26,7 @@ System::Void Project1::MyForm::button3_Click(System::Object^ sender, System::Eve
 	else
 	{
 		size = Convert::ToInt16(textBox1->Text);
-		tact= Convert::ToInt16(textBox2->Text);
+		tact = Convert::ToInt16(textBox2->Text);
 	}
 
 	process* arr = new process[size];
@@ -180,7 +180,6 @@ System::Void Project1::MyForm::button3_Click(System::Object^ sender, System::Eve
 	{
 		int nowWork = 0;
 		int done = 0;
-		bool changeNowWork = false;
 		string* str = new string[sizeLow];
 
 		while (done != sizeLow)
@@ -196,16 +195,8 @@ System::Void Project1::MyForm::button3_Click(System::Object^ sender, System::Eve
 					done++;
 					continue;
 				}
-				arrLow[nowWork].willingness = 0;
-				nowWork = findMax(sizeLow, arrLow, nowWork);
 			}
 
-			if (changeNowWork)
-			{
-				arrLow[nowWork].willingness = 0;
-				nowWork = findMax(sizeLow, arrLow, nowWork);
-				changeNowWork = false;
-			}
 
 			if (arrLow[nowWork].mas[arrLow[nowWork].index] != '\0')
 			{
@@ -224,11 +215,18 @@ System::Void Project1::MyForm::button3_Click(System::Object^ sender, System::Eve
 								arrLow[i].willingness = 0;
 								continue;
 							}
-							else
+							else if (arrLow[i].mas[arrLow[i].index] == 'И')
 							{
 								str[i] += ' ';
 								str[i] += 'Г';
 								arrLow[i].willingness++;
+							}
+							else if (arrLow[i].mas[arrLow[i].index] == 'О')
+							{
+								str[i] += ' ';
+								str[i] += 'О';
+								arrLow[i].index++;
+								arrLow[i].willingness = 0;
 							}
 						}
 					}
@@ -245,35 +243,9 @@ System::Void Project1::MyForm::button3_Click(System::Object^ sender, System::Eve
 						}
 					}
 				}
-				if (arrLow[nowWork].mas[arrLow[nowWork].index] == 'О')
-				{
-					while (arrLow[nowWork].mas[arrLow[nowWork].index] == 'О')
-					{
-						str[nowWork] += ' ';
-						str[nowWork] += arrLow[nowWork].mas[arrLow[nowWork].index];
-						arrLow[nowWork].index++;
-
-						for (int i = 0; i < sizeLow; i++)
-						{
-							if (i != nowWork)
-							{
-								if (arrLow[i].mas[arrLow[i].index] == '\0')
-								{
-									arrLow[i].willingness = 0;
-									continue;
-								}
-								else
-								{
-									str[i] += ' ';
-									str[i] += 'Г';
-									arrLow[i].willingness++;
-								}
-							}
-						}
-					}
-					changeNowWork = true;
-				}
 			}
+			arrLow[nowWork].willingness = 0;
+			nowWork = findMax(sizeLow, arrLow, nowWork);
 		}
 
 		dataGridView2->RowCount = sizeLow;
@@ -294,6 +266,7 @@ System::Void Project1::MyForm::button3_Click(System::Object^ sender, System::Eve
 		dataGridView2->AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders);
 		dataGridView2->AutoResizeColumns();
 	}
+
 	string tmp = "";
 	for (int i = 0; i < size; i++)
 	{

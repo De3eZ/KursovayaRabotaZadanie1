@@ -61,6 +61,8 @@ namespace Project1 {
 	private: System::Windows::Forms::DataGridView^ dataGridView2;
 	private: System::Windows::Forms::Label^ label3;
 
+	private: System::ComponentModel::IContainer^ components;
+
 
 	protected:
 
@@ -68,7 +70,7 @@ namespace Project1 {
 		/// <summary>
 		/// Обязательная переменная конструктора.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -157,7 +159,7 @@ namespace Project1 {
 			dataGridViewCellStyle2->BackColor = System::Drawing::Color::White;
 			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 8.999999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::DarkRed;
 			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::SystemColors::Highlight;
 			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::Color::White;
 			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
@@ -233,8 +235,4 @@ namespace Project1 {
 	public: string print(process arr, int size,int index);
 	public: int findMax(int size, process arr[], int nowWork);
 };
-
-
-
-
 }
