@@ -22,6 +22,7 @@ namespace Project1 {
 		int index = 0;
 		int done = 0;
 		int willingness = 0;
+		int number;
 	};
 
 	public ref class MyForm : public System::Windows::Forms::Form
@@ -231,7 +232,7 @@ namespace Project1 {
 	private: int size,tact;
 
 	public: int getPriority();
-	public:	void createMas(process& prcss);
+	public:	void createMas(process& prcss, int index);
 	public: string print(process arr, int size,int index);
 	public: int findMax(int size, process arr[], int nowWork);
 };

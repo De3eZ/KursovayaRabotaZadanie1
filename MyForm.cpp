@@ -32,11 +32,12 @@ System::Void Project1::MyForm::button3_Click(System::Object^ sender, System::Eve
 	process* arr = new process[size];
 	for (int i = 0; i < size; i++)
 	{
-		createMas(arr[i]);
+		createMas(arr[i],i);
 	}
 	int sizeLow = 0, sizeHigh = 0;
 	for (int i = 0; i < size; i++)
 	{
+	
 		if (arr[i].priority == 1)
 		{
 			sizeHigh++;
@@ -158,13 +159,13 @@ System::Void Project1::MyForm::button3_Click(System::Object^ sender, System::Eve
 
 		dataGridView1->TopLeftHeaderCell->Value = "Процесс Round-robin";
 		dataGridView1->AutoResizeColumns();
-
+		
 		for (int i = 0; i < dataGridView1->RowCount; i++)
 		{
 			string mes = str[i];
 			String^ mess = gcnew System::String(mes.c_str());
 
-			dataGridView1->Rows[i]->HeaderCell->Value = Convert::ToString(i + 1);
+			dataGridView1->Rows[i]->HeaderCell->Value = Convert::ToString(arrHigh[i].number);
 			dataGridView1->Rows[i]->Cells[0]->Value = mess;
 		}
 
@@ -253,13 +254,13 @@ System::Void Project1::MyForm::button3_Click(System::Object^ sender, System::Eve
 
 		dataGridView2->TopLeftHeaderCell->Value = "Процесс FCFS";
 		dataGridView2->AutoResizeColumns();
-
+		
 		for (int i = 0; i < dataGridView2->RowCount; i++)
 		{
+			
 			string mes = str[i];
 			String^ mess = gcnew System::String(mes.c_str());
-
-			dataGridView2->Rows[i]->HeaderCell->Value = Convert::ToString(i + 1);
+			dataGridView2->Rows[i]->HeaderCell->Value = Convert::ToString(arrLow[i].number);
 			dataGridView2->Rows[i]->Cells[0]->Value = mess;
 		}
 
@@ -270,7 +271,7 @@ System::Void Project1::MyForm::button3_Click(System::Object^ sender, System::Eve
 	string tmp = "";
 	for (int i = 0; i < size; i++)
 	{
-		tmp += print(arr[i], size, i + 1);
+		tmp += print(arr[i], size, arr[i].number);
 	}
 
 	String^ message = gcnew System::String(tmp.c_str());
@@ -292,7 +293,7 @@ int Project1::MyForm::getPriority()
 	return distribution(generator);
 }
 
-void Project1::MyForm::createMas(process& prcss)
+void Project1::MyForm::createMas(process& prcss,int index)
 {
 	random_device random_device;
 	mt19937 generator(random_device());
@@ -330,6 +331,7 @@ void Project1::MyForm::createMas(process& prcss)
 
 	prcss.mas = mas;
 	prcss.priority = getPriority();
+	prcss.number = index + 1;
 }
 
 string Project1::MyForm::print(process arr, int size,int index)
